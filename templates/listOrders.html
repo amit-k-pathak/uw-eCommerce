@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+<title>View Orders</title>
+<link rel="stylesheet" href={{url_for('static', filename='css/editProfile.css') }} />
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css') }} />
+	<link rel="stylesheet" href={{url_for('static', filename='css/tablestyle.css') }} />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{url_for('static', filename='images/lampertcig2.png') }} />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+	<span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	</span>
+	{% else %}
+	<span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+		</span>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART ({{noOfItems}})
+		</a>
+	</div>
+</div>
+
+
+<div class="container mt-5">
+  <h2>Order List</h2>
+
+  <p style="color:red">{{ msg }}</p>
+
+  <table class="table">
+    <thead>
+      <tr class="table__header">
+        <th class="table__row">Order ID</th>
+        <th class="table__row">Order Date</th>
+		  <th class="table__row">Customer Email</th>
+        <th class="table__row">Total Price</th>
+		   <th class="table__row">Order Status</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for row in profileData %}
+      <tr class="table__row">
+        <td class="table__cell">{{row[0]}}</td>
+        <td class="table__cell">{{row[1]}}</td>
+        <td class="table__cell">{{row[2]}}</td>
+		  <td class="table__cell">{{row[3]}}</td>
+		  <td class="table__cell">{{row[4]}}</td>
+      </tr>
+    {% endfor %}
+      <!-- Add more rows for other orders -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Include Bootstrap JS (Optional, if you want to use Bootstrap's JavaScript features) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

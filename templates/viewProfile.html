@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+<title>View Profile Information </title>
+<link rel="stylesheet" href={{url_for('static', filename='css/editProfile.css') }} />
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css') }} />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{url_for('static', filename='images/lampertcig2.png') }} />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+	<span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	</span>
+	{% else %}
+	<span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	</span>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART ({{noOfItems}})
+		</a>
+	</div>
+</div>
+
+<div class="container mt-5">
+<!--	<h5>Customer Profile</h5>-->
+	<br><br><br>
+	<div class="card">
+      <div class="card-header">
+        	<h3>Customer Profile</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-3">{{profileData[2]}} {{profileData[3]}}</h4>
+			<p><strong>Email:</strong> {{profileData[1]}}</p>
+			  <p><strong>Company Name:</strong> {{profileData[2]}}</p>
+<!--			<p><strong>First Name:</strong> {{profileData[2]}}</p>-->
+<!--			<p><strong>Last Name:</strong> {{profileData[3]}}</p>-->
+			<p><strong>Billing Address 1:</strong> {{profileData[3]}}</p>
+			<p><strong>Billing Address 2:</strong> {{profileData[4]}}</p>
+			<p><strong>Billing Zip Code:</strong> {{profileData[5]}}</p>
+			<p><strong>Billing City: </strong> {{profileData[6]}}</p>
+			<p><strong>Billing State: </strong> {{profileData[7]}}</p>
+			<p><strong>Billing Country: </strong> {{profileData[8]}}</p>
+			<p><strong>Billing Phone Number:</strong> {{profileData[9]}}
+			  <p><strong>Shipping Address 1:</strong> {{profileData[10]}}</p>
+			<p><strong>Shipping Address 2:</strong> {{profileData[11]}}</p>
+			<p><strong>Shipping Zip Code:</strong> {{profileData[12]}}</p>
+			<p><strong>Shipping City: </strong> {{profileData[13]}}</p>
+			<p><strong>Shipping State: </strong> {{profileData[14]}}</p>
+			<p><strong>Shipping Country: </strong> {{profileData[15]}}</p>
+			<p><strong>Shipping Phone Number:</strong> {{profileData[16]}}
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!--		<p><strong>Email:</strong> {{profileData[1]}}</p>-->
+<!--		<p><strong>First Name:</strong>{{profileData[2]}}</p>-->
+<!--        <p><strong>Last Name:</strong> {{profileData[3]}}</p>-->
+<!--		<p><strong>Address 1:</strong> {{profileData[4]}}</p>-->
+<!--		<p><strong>Address 2:</strong> {{profileData[5]}}</p>-->
+<!--		<p><strong>Zip Code:</strong> {{profileData[6]}}</p>-->
+<!--		<p><strong>City: </strong> {{profileData[7]}}</p>-->
+<!--		<p><strong>State: </strong> {{profileData[8]}}</p>-->
+<!--		<p><strong>Country: </strong> {{profileData[9]}}</p>-->
+<!--		<p><strong>Phone Number:</strong> {{profileData[10]}}-->
+    <br><br>
+	<a href="{{ url_for('profileHome') }}">Go to Profile</a>
+</div>
+ <!-- Bootstrap JS and jQuery links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+<link rel="stylesheet" href="{{url_for('static', filename='css/editProfile.css')}}" />
+<link rel="stylesheet" href="{{url_for('static', filename='css/topStyle.css') }}" />
+<link rel="stylesheet" href="{{url_for('static', filename='css/tablestyle.css') }}" />
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= "{{url_for('static', filename='images/lampertcig2.png') }}" />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+    <span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+    </span>
+	{% else %}
+    <span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/logout">Sign Out</a>
+            <hr>
+		</div>
+	</div>
+    </span>
+	{% endif %}
+<!--	<div id="kart">-->
+<!--		<a class="link" href="/cart">-->
+<!--			<img src="{{url_for('static', filename='images/shoppingCart.png')}}" id="cartIcon" />-->
+<!--			CART {{noOfItems}}-->
+<!--		</a>-->
+<!--	</div>-->
+</div>
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/dashboard/">
+
+     <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+<div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+		    <br>
+			<br>
+			<br>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="/productList">
+                  <span data-feather="home"></span>
+				  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/orderList">
+                  <span data-feather="file"></span>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productList">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+                 <li class="nav-item">
+                <a class="nav-link" href="/add">
+                  <span data-feather="layers"></span>
+                  Add Product
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/listCustomers">
+                  <span data-feather="users"></span>
+                  Customers
+                </a>
+              </li>
+
+                 <li class="nav-item">
+                <a class="nav-link" href="/invite">
+                  <span data-feather="users"></span>
+                    Invite
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+            <div class="btn-toolbar mb-2 mb-md-0">
+            </div>
+          </div>
+
+
+
+    <div class="container mt-5">
+         <div class="card">
+      <div class="card-header">
+        	<h3>Add Product</h3>
+      </div>
+         <div class="card-body">
+<!--        <h1>Add Product</h1>-->
+        <form action="/addItem" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" id="productName" name="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="size">SIZE</label>
+                <input type="text" class="form-control" id="size" name="size" rows="3" required>
+            </div>
+             <div class="form-group">
+                <label for="weight">Weight</label>
+                <input type="text" class="form-control" id="weight" name="weight" rows="3" required>
+            </div>
+            <div class="form-group">
+                <label for="presentation">Presentation</label>
+                <input type="text" class="form-control" id="presentation" name="presentation" rows="3" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Count</label>
+                <input type="text" class="form-control" id="count" name="count" rows="3" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pricepercigar">Price Per Cigar</label>
+                <input type="text" class="form-control" id="pricepercigar" name="pricepercigar" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="priceperbox">Price Per Box</label>
+                <input type="text" class="form-control" id="priceperbox" name="priceperbox" step="0.01" required>
+            </div>
+
+             <div class="form-group">
+                <label for="countryoforigin">Country of Origin</label>
+                <input type="text" class="form-control" id="countryoforigin" name="countryoforigin" step="0.01" required>
+            </div>
+             <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category">
+                     <option value="" selected disabled hidden>Select an option</option>
+<!--                    <option value="FACTORY">FACTORY</option>-->
+<!--                    <option value="MY&MI EURO">MY&MI EURO</option>-->
+<!--                    <option value="MY&MI USD">MY&MI USD</option>-->
+<!--                    <option value="EXW SWITZERLAND CHF">EXW SWITZERLAND CHF</option>-->
+                    {% for row in categories %}
+			            <option value="{{row[0]}}">{{row[1]}}</option>
+		            {% endfor %}
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
+              </div>
+         </div>
+<!-- </div>-->
+     <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.1/dist/Chart.min.js"></script>
+    <script>
+
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

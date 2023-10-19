@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+<title>Edit Profile </title>
+<!--<link rel="stylesheet" href={{ url_for('static', filename='css/editProfile.css') }} />-->
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css') }} />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{url_for('static', filename='images/lampertcig2.png') }} />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+	<span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+		</span>
+	{% else %}
+	<span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	</span>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART ({{noOfItems}})
+		</a>
+	</div>
+</div>
+
+<div class="container mt-5">
+	<h5>Edit profile</h5>
+	<p style="color:red">{{ msg }}</p>
+	<br>
+	<form action="/updateProfile" method="POST">
+		 <div class="form-group">
+			  <label for="email">Email:</label>
+			  <input type="email" id="email" name="email" class="form-control" value={{profileData[1]}} readonly="readonly">
+		 </div>
+
+		 <div class="form-group">
+			  <label for="companyName">Company Name:</label>
+			  <input type="text" id="companyName" name="companyName" class="form-control" value="{{profileData[2]}}">
+		 </div>
+
+         <div class="form-group">
+			  <label for="billingaddress1">Billing Address 1:</label>
+			  <input type="text" id="billingaddress1" name="billingaddress1" class="form-control" value="{{profileData[3]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingaddress2">Billing Address 2:</label>
+			  <input type="text" id="billingaddress2"  name="billingaddress2" class="form-control" value="{{profileData[4]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingzipcode">Billing Zip Code:</label>
+			  <input type="text" id="billingzipcode" name="billingzipcode" class="form-control" value="{{profileData[5]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingcity">Billing City:</label>
+			  <input type="text" id="billingcity" name="billingcity" class="form-control" value="{{profileData[6]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingstate">Billing State:</label>
+			 <input type="text" id="billingstate" name="billingstate" class="form-control" value="{{profileData[7]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingcountry">Billing Country:</label>
+			  <input type="text" id="billingcountry" name="billingcountry" class="form-control" value="{{profileData[8]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="billingphone">Billing Phone Number:</label>
+			  <input type="text" id="billingphone" name="billingphone" class="form-control" value="{{profileData[9]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingaddress1">Shipping Address 1:</label>
+			  <input type="text" id="shippingaddress1" name="shippingaddress1" class="form-control" value="{{profileData[10]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingaddress2">Shipping Address 2:</label>
+			  <input type="text" id="shippingaddress2"  name="shippingaddress2" class="form-control" value="{{profileData[11]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingzipcode">Shipping Zip Code:</label>
+			  <input type="text" id="shippingzipcode" name="shippingzipcode" class="form-control" value="{{profileData[12]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingcity">Shipping City:</label>
+			  <input type="text" id="shippingcity" name="shippingcity" class="form-control" value="{{profileData[13]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingstate">Shipping State:</label>
+			 <input type="text" id="shippingstate" name="shippingstate" class="form-control" value="{{profileData[14]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingcountry">Shipping Country:</label>
+			  <input type="text" id="shippingcountry" name="shippingcountry" class="form-control" value="{{profileData[15]}}">
+		 </div>
+
+		<div class="form-group">
+			  <label for="shippingphone">Shipping Phone Number:</label>
+			  <input type="text" id="shippingphone" name="shippingphone" class="form-control" value="{{profileData[16]}}">
+		 </div>
+        <br>
+		<input type="submit" value="Save" class="btn btn-primary">
+		<br><br>
+		<a href="{{ url_for('profileHome') }}">Go to Profile</a>
+	</form>
+</div>
+<!-- Bootstrap JS and jQuery links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

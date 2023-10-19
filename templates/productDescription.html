@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+	<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+<title>Product Description</title>
+<link rel="stylesheet" href={{url_for('static', filename='css/productDescription.css')}} />
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css')}} />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{url_for('static', filename='images/lampertcig2.png') }} />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+	<span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	</span>
+	{% else %}
+	<span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	</span>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART ({{noOfItems}})
+		</a>
+	</div>
+</div>
+<div id="display">
+	<div id="productName">
+		<h2>{{data[1]}}</h2>
+	</div>
+	<div>
+		<img src={{url_for('static', filename='uploads/'+data[4]) }} id="productImage"/>
+	</div>
+
+	<div id="productDescription">
+		<h2>Details</h2>
+<!--		<table id="descriptionTable">-->
+
+		    <table class="table table-bordered">
+<form method="GET" action="/cart">
+				<tr>
+					<td>Name</td>
+					<td>{{data[1]}}</td>
+				</tr>
+				<tr>
+					<td>Size</td>
+					<td>{{data[3]}}</td>
+				</tr>
+				<tr>
+					<td>Weight</td>
+					<td>{{data[6]}}</td>
+				</tr>
+				<tr>
+					<td>Presentation</td>
+					<td>{{data[10]}}</td>
+				</tr>
+				<tr>
+					<td>Count</td>
+					<td>{{data[5]}}</td>
+				</tr>
+				<tr>
+					<td>Quantity (In Boxes)</td>
+<!--					<td><input type="text" name="qty" id="qty"></td>-->
+					<td>
+					<div class="input-group mb-3">
+            			<div class="input-group-prepend">
+                			<button class="btn btn-outline-secondary" type="button" id="minus-btn">-</button>
+            			</div>
+           				 <input type="number" min="1" max="1200" class="form-control col-2 text-center" name="quantity" id="quantity" value="1">
+            		<div class="input-group-append">
+                			<button class="btn btn-outline-secondary" type="button" id="plus-btn">+</button>
+            		</div>
+        			</div>
+					</td>
+<!--					<td><input type="submit" value="Next"/>-->
+				</tr>
+            </form>
+<!--                <td><input type="text" class="form-control" id="name" value="1" placeholder="Enter Quantity"></td>-->
+		</table>
+		<table class="table table-bordered">
+			<tr>
+				<td>Price Per Cigar</td>
+				<td>{{data[8]}}</td>
+			</tr>
+			<tr>
+				<td>Price Per Box</td>
+				<td>{{data[2]}}</td>
+			</tr>
+		</table>
+		<h2>Description</h2>
+		<table class="table table-bordered">
+			<tr>
+				<td>Country of Origin:</td>
+				<td>{{data[9]}}</td>
+			</tr>
+			<tr>
+				<td>UPC CODE: </td>
+				<td>{{data[7]}}</td>
+			</tr>
+		</table>
+	</div>
+	<div id="addToCart">
+<!--		<a class="btn btn-primary" href="#" role="button">Link</a>-->
+		<a class="btn btn-primary" href="/addToCart?productId={{request.args.get('productId')}}" role="button">Add to Cart</a>
+<!--		<button id="myButton" class="btn btn-primary">Add to Cart</button>-->
+<!--		<button class="btn btn-primary" type="submit">Submit</button>-->
+
+	</div>
+</div>
+
+<!--</form>-->
+<!-- Include Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var quantityField = $("#quantity");
+            var minusButton = $("#minus-btn");
+            var plusButton = $("#plus-btn");
+
+            minusButton.click(function() {
+                var currentValue = parseInt(quantityField.val());
+                if (currentValue > 1) {
+                    quantityField.val(currentValue - 1);
+                }
+            });
+
+            plusButton.click(function() {
+                var currentValue = parseInt(quantityField.val());
+                quantityField.val(currentValue + 1);
+            });
+        });
+    </script>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+              location.href = "/addToCart?productId={{request.args.get('productId')}};
+    };
+</script>
+<script>
+	var quantityField = $("#quantity");
+  const qt = quantityField.val();
+  localStorage.setItem("qty", qt);
+</script>
+
+</body>
+</html>
+

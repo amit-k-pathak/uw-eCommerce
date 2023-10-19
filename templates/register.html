@@ -1,0 +1,343 @@
+<html>
+<head>
+<title>Customer Registration</title>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}">
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/address.js') }}">
+</script>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+<form action="/register" method="POST" onsubmit="return validate()">
+     <p style="color:red"> {{error}} </p>
+    <div class="form-group">
+        <h5> Customer Registration </h5>
+        <p>Email: <input type="email" name="email" class="form-control"></p>
+    </div>
+    <div class="form-group">
+        <p>Password: <input type="password" name="password" class="form-control" id="password" required ></p>
+    </div>
+    <div class="form-group">
+        <p>Confirm Password: <input type="password" name="cpassword" id="cpassword" class="form-control"></p>
+    </div>
+    <div class="form-group">
+        <p>Name of Company: <input type="text" name="companyName" class="form-control"></p>
+    </div>
+<!--    <p>First Name: <input type="text" name="firstName"></p>-->
+<!--    <p>Last Name: <input type="text" name="lastName"></p>-->
+
+     <h5> Billing Address </h5>
+    <div class="form-row">
+            <div class="form-group col-md-6">
+<!--                <div class="form-group">-->
+                  <p>Address Line 1: <input type="text" name="address1" class="form-control"></p>
+<!--                </div>-->
+            </div>
+            <div class="form-group col-md-6">
+<!--               <div class="form-group">-->
+                   <p>Address Line 2: <input type="text" name="address2" class="form-control">
+<!--               </div>-->
+            </div>
+    </div>
+     <div class="form-row">
+            <div class="form-group col-md-6">
+<!--                <div class="form-group">-->
+                    <p>Zipcode: <input type="text" name="zipcode" class="form-control"></p>
+<!--                </div>-->
+            </div>
+            <div class="form-group col-md-6">
+<!--                <div class="form-group">-->
+                    <p>City: <input type="text" name="city" class="form-control"></p>
+<!--                </div>-->
+            </div>
+     </div>
+
+    <div class="form-row">
+            <div class="form-group col-md-6">
+<!--                <div class="form-group">-->
+                    <p>State: <input type="text" name="state" class="form-control"></p>
+<!--                </div>-->
+            </div>
+        <div class="form-group col-md-6">
+<!--            <div class="form-group">-->
+                <p>Country: <input type="text" name="country" class="form-control"></p>
+<!--            </div>-->
+            </div>
+        </div>
+
+    <div class="form-row">
+            <div class="form-group col-md-6">
+<!--                <div class="form-group">-->
+                    <p>Phone Number: <input type="text" name="phone" class="form-control"></p>
+<!--                </div>-->
+            </div>
+        <div class="form-group col-md-6">
+<!--     <div class="form-group">-->
+                <p>Contact Person: <input type="text" name="contactPerson" class="form-control"></p>
+<!--       </div>-->
+        </div>
+     </div>
+    <h5>Shipping Address</h5>
+      <div class="form-row">
+            <div class="form-group col-md-6">
+<!--      <div class="form-group">-->
+<!--                <label for="shippingAddressLine1">Address Line 1:</label>-->
+
+                <p>Address Line 1: <input type="text" name="shippingAddressLine1" class="form-control" placeholder="Enter address line 1"></p>
+
+<!--                <input type="text" class="form-control" id="shippingAddressLine1" placeholder="Enter address line 1">-->
+<!--      </div>-->
+            </div>
+            <div class="form-group col-md-6">
+<!--      <div class="form-group">-->
+<!--                <label for="shippingAddressLine2">Address Line 2:</label>-->
+<!--                <input type="text" class="form-control" id="shippingAddressLine2" placeholder="Enter address line 2">-->
+
+                <p>Address Line 2: <input type="text" name="shippingAddressLine2" class="form-control" placeholder="Enter address line 2">
+<!--</div>-->
+             </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+<!--          <label for="shippingCity">City:</label>-->
+<!--          <input type="text" class="form-control" id="shippingCity" placeholder="Enter city" required>-->
+             <p>City: <input type="text" name="shippingCity" class="form-control" placeholder="Enter city"></p>
+
+        </div>
+        <div class="form-group col-md-6">
+<!--          <label for="shippingState">State or Province:</label>-->
+<!--          <input type="text" class="form-control" id="shippingState" placeholder="Enter state or province" required>-->
+              <p>State: <input type="text" name="shippingState" class="form-control" placeholder="Enter state or province"></p>
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+<!--          <label for="shippingZipCode">Zip Code:</label>-->
+<!--          <input type="text" class="form-control" id="shippingZipCode" placeholder="Enter zip code" required>-->
+              <p>Zipcode: <input type="text" name="shippingZipCode" class="form-control" placeholder="Enter zip code"></p>
+
+        </div>
+        <div class="form-group col-md-6">
+<!--          <label for="shippingCountry">Country:</label>-->
+<!--          <input type="text" class="form-control" id="shippingCountry" placeholder="Enter country" required>-->
+               <p>Country: <input type="text" name="shippingCountry" class="form-control" placeholder="Enter country"></p>
+        </div>
+      </div>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+<!--        <label for="shippingContactPerson">Contact Person:</label>-->
+<!--        <input type="text" class="form-control" id="shippingContactPerson" placeholder="Enter contact person">-->
+            <p>Contact Person: <input type="text" name="shippingContactPerson" class="form-control" placeholder="Enter contact person"></p>
+      </div>
+        <div class="form-group col-md-6">
+<!--          <label for="shippingPhone">Phone:</label>-->
+<!--          <input type="tel" class="form-control" id="shippingPhone" placeholder="Enter phone number">-->
+              <p>Phone Number: <input type="text" name="shippingPhone" class="form-control" placeholder="Enter phone number"></p>
+        </div>
+      </div>
+      <div class="form-group">
+	  <h5>Invoicing Unit</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="boxes">Boxes:</label>
+        <select class="form-control" id="boxes">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="thousandsofCigars">Thousands of Cigars:</label>
+        <select class="form-control" id="thousandsofCigars">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="cigars">Cigars:</label>
+        <select class="form-control" id="cigars">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="kilograms">Kilograms:</label>
+        <select class="form-control" id="kilograms">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="bundles">Bundles:</label>
+        <select class="form-control" id="bundles">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="other">Other (specify):</label>
+        <select class="form-control" id="other">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  </div>
+
+	  <div class="form-group">
+	  <h5>Required Notes on Invoice</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+          <label for="notes">Notes:</label>
+		  <textarea class="form-control" id="notes" rows="3" placeholder="Enter your invoice notes"></textarea>
+      </div>
+	  </div>
+	  </div>
+
+	  <div class="form-group">
+	  <h5>Required Export Documents</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Export">Export Invoice:</label>
+        <select class="form-control" id="Export">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="GSTP">GSTP Certificate:</label>
+        <select class="form-control" id="GSTP">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Shipping">Shipping List:</label>
+        <select class="form-control" id="Shipping">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="Stamps">Tax Stamps:</label>
+        <select class="form-control" id="Stamps">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Origin">Certificate of Origin:</label>
+        <select class="form-control" id="Origin">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="Phitosanitary">Phitosanitary Certificate:</label>
+        <select class="form-control" id="Phitosanitary">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="EUR1">EUR1 Cerificate:</label>
+        <select class="form-control" id="EUR1">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="License">Import License:</label>
+        <select class="form-control" id="License">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="GSP">GSP Certificate:</label>
+        <select class="form-control" id="GSP">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+
+		 <div class="form-group col-md-6">
+        <label for="other2">Other (specify):</label>
+        <select class="form-control" id="other2">
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+
+	  </div>
+
+
+
+
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="sameAddress" onchange="copyAddress()">
+        <label class="form-check-label" for="sameAddress">Billing Address Is Same as Shipping Address</label>
+      </div>
+    <p><input type="submit" value="Register" class="btn btn-primary"></p>
+    <a href="/loginForm">Already Registered? Login here</a>
+</form>
+
+
+    <!-- Bootstrap JS and jQuery links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+
+
+</body>
+</html>
+

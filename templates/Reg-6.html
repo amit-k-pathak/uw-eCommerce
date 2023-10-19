@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration Form</title>
+  <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <p style="color:red"> {{error}} </p>
+    <h2>Customer Registration</h2>
+<!--    <form action="/register" method="POST" onsubmit="return validateForm()">-->
+      <form action="/register" method="POST">
+
+      <div class="form-group">
+        <label for="companyName">Name of the Company:</label>
+        <input type="text" class="form-control"  name="companyName" id="companyName" placeholder="Enter name of the company" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter a password" required>
+      </div>
+<!--      <div class="form-group">-->
+<!--        <label for="confirmPassword">Confirm Password:</label>-->
+<!--        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>-->
+<!--        <small id="passwordMatchError" class="text-danger"></small>-->
+<!--      </div>-->
+
+
+        <h5>Billing Address</h5>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+          <label for="addressLine1">Address Line 1:</label>
+        <input type="text" class="form-control" id="addressLine1" name="addressLine1" placeholder="Enter address line 1">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="addressLine2">Address Line 2:</label>
+        <input type="text" class="form-control" id="addressLine2" name="addressLine2" placeholder="Enter address line 2">
+      </div>
+        </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="city">City:</label>
+          <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="state">State or Province:</label>
+          <input type="text" class="form-control" id="state" name="state" placeholder="Enter state or province" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="zipCode">Zip Code:</label>
+          <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Enter zip code" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="country">Country:</label>
+          <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" required>
+        </div>
+      </div>
+      <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="contactPerson">Contact Person:</label>
+        <input type="text" class="form-control" id="contactPerson" name="contactPerson" placeholder="Enter contact person">
+		</div>
+        <div class="form-group col-md-6">
+          <label for="phone">Phone:</label>
+          <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+        </div>
+      </div>
+
+      <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="billingEmailId">Email ID:</label>
+        <input type="text" class="form-control" id="billingEmailId" name="billingEmailId" placeholder="Enter contact person">
+		</div>
+      </div>
+
+      <br>
+	  <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="sameAddress" name="sameAddress" onchange="copyAddress()">
+        <label class="form-check-label" for="sameAddress" style="background-color:powderblue;">Billing Address Is Same as Shipping Address</label>
+      </div>
+	  <br>
+
+
+
+        <h5>Shipping Address</h5>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+        <label for="shippingAddressLine1">Address Line 1:</label>
+        <input type="text" class="form-control" id="shippingAddressLine1" name="shippingAddressLine1" placeholder="Enter address line 1">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="shippingAddressLine2">Address Line 2:</label>
+        <input type="text" class="form-control" id="shippingAddressLine2" name="shippingAddressLine2" placeholder="Enter address line 2">
+      </div>
+            </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="shippingCity">City:</label>
+          <input type="text" class="form-control" id="shippingCity" name="shippingCity" placeholder="Enter city" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="shippingState">State or Province:</label>
+          <input type="text" class="form-control" id="shippingState" name="shippingState" placeholder="Enter state or province" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="shippingZipCode">Zip Code:</label>
+          <input type="text" class="form-control" id="shippingZipCode" name="shippingZipCode" placeholder="Enter zip code" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="shippingCountry">Country:</label>
+          <input type="text" class="form-control" id="shippingCountry" name="shippingCountry" placeholder="Enter country" required>
+        </div>
+      </div>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="contactPerson">Contact Person:</label>
+        <input type="text" class="form-control" id="shippingContactPerson" name="shippingContactPerson" placeholder="Enter contact person">
+      </div>
+        <div class="form-group col-md-6">
+          <label for="phone">Phone:</label>
+          <input type="tel" class="form-control" name="shippingPhone" id="shippingPhone" placeholder="Enter phone number">
+        </div>
+      </div>
+
+       <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="shippingEmailId">Email ID:</label>
+        <input type="text" class="form-control" id="shippingEmailId" name="shippingEmailId" placeholder="Enter contact person">
+		</div>
+      </div>
+
+      <div class="form-group">
+	  <h5>Invoicing Unit</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="boxes">Boxes:</label>
+        <select class="form-control" id="boxes" name="boxes" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="thousandsofCigars">Thousands of Cigars:</label>
+        <select class="form-control" name="thousandsofCigars" id="thousandsofCigars" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="cigars">Cigars:</label>
+        <select class="form-control" name="cigars" id="cigars" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="kilograms">Kilograms:</label>
+        <select class="form-control" id="kilograms" name="kilograms" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="bundles">Bundles:</label>
+        <select class="form-control" name="bundles" id="bundles" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="other">Other (specify):</label>
+        <select class="form-control" id="other" name="other" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	    
+	  </div>
+	  
+	  <div class="form-group">
+	  <h5>Required Notes on Invoice</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+          <label for="notes">Notes:</label>
+		  <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter your invoice notes"></textarea>
+      </div>
+	  </div>
+	  </div>
+      
+	  
+	  
+	  <div class="form-group">
+	  <h5>Required Export Documents</h5>
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Export">Export Invoice:</label>
+        <select class="form-control" name="Export" id="Export" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="GSTP">GSTP Certificate:</label>
+        <select class="form-control" name="GSTP" id="GSTP" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Shipping">Shipping List:</label>
+        <select class="form-control" name="Shipping" id="Shipping" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="Stamps">Tax Stamps:</label>
+        <select class="form-control" id="Stamps" name="Stamps" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="Origin">Certificate of Origin:</label>
+        <select class="form-control" name="Origin" id="Origin" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="Phitosanitary">Phitosanitary Certificate:</label>
+        <select class="form-control" id="Phitosanitary" name="Phitosanitary" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="EUR1">EUR1 Cerificate:</label>
+        <select class="form-control" name="EUR1" id="EUR1" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="License">Import License:</label>
+        <select class="form-control" id="License" name="License" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	  
+	  <div class="form-row">
+	  <div class="form-group col-md-6">
+        <label for="GSP">GSP Certificate:</label>
+        <select class="form-control" name="GSP" id="GSP" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+		
+		 <div class="form-group col-md-6">
+        <label for="other2">Other (specify):</label>
+        <select class="form-control" name="other2" id="other2" required>
+          <option value="">Select an option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+		</div>
+      </div>
+	    
+	  </div>
+
+
+<!--         <p><input type="submit" class="btn btn-primary" value="Register"></p>-->
+      <button type="submit" class="btn btn-primary">Register</button>
+          <a href="/loginForm">Already Registered? Login here</a>
+    </form>
+  </div>
+
+  <script>
+  function validateForm() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var passwordMatchError = document.getElementById("passwordMatchError");
+
+    if (password !== confirmPassword) {
+      passwordMatchError.textContent = "Passwords do not match.";
+      return false;
+    } else {
+      passwordMatchError.textContent = "";
+    }
+
+    return true;
+  }
+
+  function copyAddress() {
+    if (document.getElementById("sameAddress").checked) {
+      var billingAddressLine1 = document.getElementById("addressLine1").value;
+      var billingAddressLine2 = document.getElementById("addressLine2").value;
+      var billingCity = document.getElementById("city").value;
+      var billingState = document.getElementById("state").value;
+      var billingZipCode = document.getElementById("zipCode").value;
+      var billingCountry = document.getElementById("country").value;
+	  var billingContactPerson = document.getElementById("contactPerson").value;
+	  var billingPhone = document.getElementById("phone").value;
+	  var billingEmailID = document.getElementById("billingEmailId").value;
+
+
+      // Copy billing address to shipping address
+      document.getElementById("shippingAddressLine1").value = billingAddressLine1;
+      document.getElementById("shippingAddressLine2").value = billingAddressLine2;
+      document.getElementById("shippingCity").value = billingCity;
+      document.getElementById("shippingState").value = billingState;
+      document.getElementById("shippingZipCode").value = billingZipCode;
+      document.getElementById("shippingCountry").value = billingCountry;
+	  document.getElementById("shippingContactPerson").value = billingContactPerson;
+	  document.getElementById("shippingPhone").value = billingPhone;
+	   document.getElementById("shippingEmailId").value = billingEmailID;
+    } else {
+      // Clear shipping address
+      document.getElementById("shippingAddressLine1").value = "";
+      document.getElementById("shippingAddressLine2").value = "";
+      document.getElementById("shippingCity").value = "";
+      document.getElementById("shippingState").value = "";
+      document.getElementById("shippingZipCode").value = "";
+      document.getElementById("shippingCountry").value = "";
+	  document.getElementById("shippingContactPerson").value = "";
+	  document.getElementById("shippingPhone").value = "";
+	  document.getElementById("shippingEmailId").value = "";
+    }
+  }
+</script>
+</body>
+</html>

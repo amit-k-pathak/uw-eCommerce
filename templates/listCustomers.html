@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+<title>Customer List</title>
+<link rel="stylesheet" href={{url_for('static', filename='css/editProfile.css') }} />
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css') }} />
+	<link rel="stylesheet" href={{url_for('static', filename='css/tablestyle.css') }} />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{url_for('static', filename='images/lampertcig2.png') }} />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+    <span>
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+    </span>
+	{% else %}
+    <span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/logout">Sign Out</a>
+            <hr>
+		</div>
+	</div>
+    </span>
+	{% endif %}
+<!--	<div id="kart">-->
+<!--		<a class="link" href="/cart">-->
+<!--			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />-->
+<!--			CART {{noOfItems}}-->
+<!--		</a>-->
+<!--	</div>-->
+</div>
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/dashboard/">
+
+     <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+<div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+		    <br>
+			<br>
+			<br>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="/productList">
+                  <span data-feather="home"></span>
+				  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/orderList">
+                  <span data-feather="file"></span>
+                  Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productList">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+                 <li class="nav-item">
+                <a class="nav-link" href="/add">
+                  <span data-feather="layers"></span>
+                  Add Product
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/listCustomers">
+                  <span data-feather="users"></span>
+                  Customers
+                </a>
+              </li>
+
+                 <li class="nav-item">
+                <a class="nav-link" href="/invite">
+                  <span data-feather="users"></span>
+                    Invite
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+            <div class="btn-toolbar mb-2 mb-md-0">
+            </div>
+          </div>
+
+
+
+<div class="container mt-5">
+	 <div class="card">
+      <div class="card-header">
+        	<h3>Customer List</h3>
+      </div>
+
+         {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+            {% for message in messages %}
+             <div class = "alert alert-success alert-dismissable" role="alert" >
+                 <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                     <span aria-hidden="true">X</span>
+                 </button>
+                 {{message}}
+             </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+
+         <div class="card-body">
+
+<!--  <h2>Customer List</h2>-->
+
+  <p style="color:red">{{ msg }}</p>
+
+  <table class="table">
+    <thead>
+      <tr class="table__header">
+        <th class="table__cell">Customer ID</th>
+        <th class="table__cell">E-mail ID</th>
+        <th class="table__cell">Company Name</th>
+		  <th class="table__cell">Address</th>
+		  <th class="table__cell">Zip Code</th>
+		  <th class="table__cell">City</th>
+		  <th class="table__cell">Country</th>
+		  <th class="table__cell">Phone</th>
+		  <th class="table__cell">IsAdmin</th>
+          <th class="table__cell">Catagory</th>
+          <th class="table__cell">Actions</th>
+      </tr>
+    </thead>
+<!--    <tbody>-->
+
+    {% for row in profileData %}
+      <tr class="table__row">
+        <td class="table__cell">{{row[0]}}</td>
+        <td class="table__cell">{{row[1]}}</td>
+        <td class="table__cell">{{row[2]}}</td>
+		<td class="table__cell">{{row[3]}}</td>
+		<td class="table__cell">{{row[4]}}</td>
+		<td class="table__cell">{{row[5]}}</td>
+		<td class="table__cell">{{row[6]}}</td>
+		<td class="table__cell">{{row[7]}}</td>
+		<td class="table__cell">{{row[8]}}</td>
+        <td class="table__cell">{{row[9]}}</td>
+        <td>
+              <a href="/updateCustomer/{{row[0]}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modeledit{{row[0]}}">Edit</a>
+              <a href="/deleteCustomer/{{row[0]}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+        </td>
+
+            <div id="modeledit{{row[0]}}" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"> Update Information </h4>
+            </div>
+            <div class="modal-body">
+<!--              <form enctype=multipart/form-data action="{{url_for('update')}}" method="POST">-->
+                <form action="{{url_for('updateCustomer')}}" method="POST">
+
+               <div class="form-group">
+                <label for="catagory">Cutomer Catagory</label>
+                <input type="hidden" name="id" value="{{row[0]}}">
+                <select class="form-control" id="catagory" name="catagory">
+                   <option value="" selected disabled hidden>{{row[9]}}</option>
+                    <option value="FACTORY" >FACTORY</option>
+                    <option value="MY&MI EURO">MY&MI EURO</option>
+                    <option value="MY&MI USD">MY&MI USD</option>
+                    <option value="EXW SWITZERLAND CHF">EXW SWITZERLAND CHF</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+
+
+              <div class="form-group">
+                     <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+
+              </form>
+            </div>
+               <div class="modal-footer">
+                     <button class="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
+               </div>
+        </div>
+      </div>
+            </div>
+
+
+
+
+
+
+     </tr>
+{% endfor %}
+<!--      &lt;!&ndash; Add more rows for other orders &ndash;&gt;-->
+<!--    </tbody> -->
+  </table>
+
+</div>
+		 </div>
+	</div>
+<!--</div>-->
+<!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.1/dist/Chart.min.js"></script>
+    <script>
+
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+<!-- Include Bootstrap JS (Optional, if you want to use Bootstrap's JavaScript features) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

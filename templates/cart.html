@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+span {
+  float: right;
+  position:right;
+}
+</style>
+<title>Your Cart</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/cart.css')}}" />
+<link rel="stylesheet" href="{{url_for('static', filename='css/topStyle.css') }}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+<div id="title">
+	<a href="/">
+	<img id="logo" src= "{{url_for('static', filename='images/lampertcig2.png') }}" />
+	</a>
+<!--	<form>-->
+<!--		<input id="searchBox" type="text" name="searchQuery">-->
+<!--		<input id="searchButton" type="submit" value="Search">-->
+<!--	</form>-->
+
+	{% if not loggedIn %}
+	<span>
+		<div id="signInButton">
+			<a class="link" href="/loginForm">Sign In</a>
+		</div>
+	</span>>
+	{% else %}
+<span>
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	</span>>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+		<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+		CART ({{noOfItems}})
+		</a>
+	</div>
+</div>
+<div id="cartItems">
+	<h2>Shopping Cart</h2>
+	<div id="tableItems">
+		{% for row in products %}
+		<br>
+		<div>
+			<hr id="seperator">
+			<div id="itemImage">
+				<img src="{{url_for('static', filename='uploads/'+row[3])}}" id="image"/>
+			</div>
+			<div id="itemName">
+				<span id="itemNameTag">{{row[1]}}</span><br>
+				<br>
+<!--				Qty: {{qty}}-->
+				Qty: {{row[4]}}
+<!--				<div class="input-group mb-3">-->
+<!--                <div class="input-group-prepend">-->
+<!--                   <button class="btn btn-outline-secondary" type="button" id="minus-btn">-</button>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control col-2 text-center" id="quantity" value="1">-->
+<!--              <div class="input-group-append">-->
+<!--                   <button class="btn btn-outline-secondary" type="button" id="plus-btn">+</button>-->
+<!--              </div>-->
+<!--            </div>-->
+                   <br>
+
+				<a href="/removeFromCart?productId={{row[0]}}">Remove</a>
+				<br>
+				<hr>
+			</div>
+			<div id="itemPrice">
+				{{row[2]}}
+			</div>
+		</div>
+		{% endfor %}
+		<hr id="seperator2">
+		<div id="total">
+			<p>Subtotal:</p>{{totalPrice}}
+<!--			<span id="subtotal">Subtotal</span> : {{totalPrice}}-->
+		</div>
+	</div>
+</div>
+<a class="btn btn-primary" href="/checkout" role="button">Proceed to checkout</a>
+
+ <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  // Retrieve the variable's value from localStorage
+  const variableValue = localStorage.getItem("qty");
+
+  // Use the variableValue as needed
+  console.log(variableValue);
+</script>
+
+</body>
+</html>
+
