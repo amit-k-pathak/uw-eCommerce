@@ -922,13 +922,13 @@ def invite():
             send_email(email, subject, html)
             msg = "An invitation has been sent via email. Please check your e-mail ID for registraction."
 
-            return render_template("inviteForm.html", msg=msg)
+            return render_template("InviteForm.html", msg=msg)
         except:
             msg = "Error occured!"
-            return render_template("inviteForm.html", msg=msg)
+            return render_template("InviteForm.html", msg=msg)
     else:
         msg = ""
-        return render_template("inviteForm.html", msg=msg)
+        return render_template("InviteForm.html", msg=msg)
 
 # New Register Function
 @app.route("/register", methods=['GET', 'POST'])
@@ -1153,7 +1153,7 @@ def send_email(to, subject, template, attachment=None):
 
     mail.send(msg)
 
-# if __name__ == '__main__':
-#     # app.run(debug=True)
-#     app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(debug=True)
+    # app.run(host="0.0.0.0", port=5000)
 
